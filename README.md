@@ -26,7 +26,7 @@ In the scraper.js file comment out code from line number __82__ to __104__, and 
 
 
 # node code to run this thing
-node scraper/scraper.js --url <link to clasroom subject>
+node scraper/scraper.js --url link-to-clasroom-subject \
 Run this code from the class automation folder, or update the batch files.
 
 
