@@ -105,7 +105,7 @@ puppeteer.launch({ headless: false, defaultViewport: null, args:[ '--use-fake-ui
 
     await page.waitForSelector('input[type="text"]');
     await page.click('input[type="text"]');
-    await page.type('input[type="text"]', 'rsx-jdpc-mbi', {delay: '100'});
+    await page.type('input[type="text"]', link, {delay: '100'});
 
     await page.waitForSelector('div.Jsqtqc');
     await page.click('div.Jsqtqc');
