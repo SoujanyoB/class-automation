@@ -21,7 +21,7 @@ credentials.json => Save this files in the scraper folder and store these things
 Insitute email is optional if there is no institute mail id. I will provide with code changes to keep this intact.
 
 ## Follow this if there's no intitute mail provided.
-In the scraper.js file comment out code from line number <> to <>, and it should work fine. I hope so, xD!
+In the scraper.js file comment out code from line number __82__ to __104__, and it should work fine. I hope so, xD!
 
 
 
