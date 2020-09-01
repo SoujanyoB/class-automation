@@ -124,15 +124,28 @@ puppeteer.launch({ headless: false, defaultViewport: null, args:[ '--use-fake-ui
 
     await page.waitFor(WAITING_TIME);
 
-    let flag = false;
+    let flag = false, checkAttendance = true;
     await page.waitForSelector('span.wnPUne');
+
+
+    //code to counter the error if I connect with members equal to students left
+    while(checkAttendance) {
+        const students = await page.$eval('span.wnPUne', e => e.innerText);
+
+        if(students.parseInt() > 80) {
+            checkAttendance = false;
+        }
+    }
+
+
+    //code runs till attendance becomes less than students left
     while(true) {
         const students = await page.$eval('span.wnPUne', e => e.innerText);
         
         //Code to listen to attendance calls and chat messages
 
 
-        if(students == STUDENTS_LEFT) {
+        if(students.parseInt() < STUDENTS_LEFT) {
             flag = true;
             break;
         }
