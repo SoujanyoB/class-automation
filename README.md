@@ -1,6 +1,12 @@
 # class-automation
 Using puppeteer, I have automated google classroom and google meet!
 
+## Checklist
+- [X] Getting links from particular subject in Google Classroom
+- [X] Automating meet to signin using that link
+- [X] Ending call when class ends
+- [ ] Listening to attendance
+- [ ] Updating chat if necessary (optional for me lol)
 
 ## Dependencies required:
 1. puppeteer-extra
