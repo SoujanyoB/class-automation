@@ -1,0 +1,94 @@
+@font-face {
+    font-family: 'Unisans-Heavy';
+    src: url('./fonts/UniSansDemo-HeavyCAPS.otf');
+}
+
+@font-face {
+    font-family: 'Unisans-Thin';
+    src: url('./fonts/UniSansDemo-ThinCAPS.otf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+input {
+    width: 95%;
+    line-height: 2;
+    padding: 5px 10px;
+    font-size: large;
+}
+
+input::placeholder {
+    font-family: 'Unisans-Thin';
+}
+
+button {
+    font-size: larger;
+    font-family: 'Unisans-Heavy';
+    padding: 10px 20px;
+    background: none;
+    border: 1px solid rgba(128, 128, 128, 0.5);;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: rgba(28, 28, 124, 0.699);
+    color: white;
+}
+
+h1 {
+    font-size: 60px;
+    margin-bottom: 40px;
+    font-family: 'Unisans-Heavy';
+    letter-spacing: 5px;
+    color: rgba(28, 28, 124, 0.699);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-family: 'Unisans-Thin';
+    border: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+a:hover {
+    background-color: rgba(28, 28, 124, 0.699);
+    color: white;
+}
+
+.container {
+    /* border: 5px solid black; */
+    width: 100%;
+    height: 100%;
+}
+
+.loginForm {
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* border: 1px solid black; */
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.formElement {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+#toRegisterLink>div {
+    width: inherit;
+    padding: 10px 0;
+    /* background-color: rgba(128, 128, 128); */
+}
+
