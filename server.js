@@ -4,10 +4,10 @@ const ejs = require('ejs');
 const path = require('path');
 const bodyParser = require('body-parser');
 const _= require('lodash')
-const {mongoose} = require('./db/mongoose');
+const {mongoose} = require('./server/db/mongoose');
 
-const {User} = require('./models/user');        //Requiring User model
-var {authenticate}=require('./middleware/authenticate');
+const {User} = require('./server/models/user');        //Requiring User model
+var {authenticate}=require('./server/middleware/authenticate');
 // const fs = require('fs');
 
 // const port = process.env || 3000;
