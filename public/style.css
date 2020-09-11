@@ -8,12 +8,16 @@
     src: url('./fonts/UniSansDemo-ThinCAPS.otf');
 }
 
+.fontfamily {
+    font-family: 'Unisans-Thin';
+}
+
 * {
     margin: 0;
     padding: 0;
 }
 
-input {
+.formElement>input {
     width: 95%;
     line-height: 2;
     padding: 5px 10px;
@@ -29,7 +33,8 @@ button {
     font-family: 'Unisans-Heavy';
     padding: 10px 20px;
     background: none;
-    border: 1px solid rgba(128, 128, 128, 0.5);;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    ;
 }
 
 button:hover {
@@ -44,6 +49,13 @@ h1 {
     font-family: 'Unisans-Heavy';
     letter-spacing: 5px;
     color: rgba(28, 28, 124, 0.699);
+}
+
+h2 {
+    font-family: 'Unisans-Heavy';
+    font-size: 36px;
+    color: white;
+    margin-bottom: 20px;
 }
 
 a {
@@ -75,7 +87,6 @@ a:hover {
     box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.5);
     text-align: center;
     padding: 20px;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -86,9 +97,119 @@ a:hover {
     margin-bottom: 40px;
 }
 
+.cardHolder {
+    width: inherit;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.card {
+    margin: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 10px;
+}
+
+.accordion {
+    display: flex;
+    justify-content: space-between;
+    text-align: start;
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+}
+
+.active,
+.accordion:hover {
+    background-color: 1px solid rgba(28, 28, 124, 0.699);
+    border: 1px solid white;
+}
+
+.active {
+    border-bottom: none;
+}
+
+.routine {
+    /* margin: 0 40px; */
+    display: none;
+    border: 1px solid white;
+    border-top: none;
+    padding: 10px;
+}
+
+.addRoutineButton {
+    width: inherit;
+    text-align: center;
+}
+
+.addRoutineButton>button {
+    border: 1px solid white;
+    font-size: medium;
+}
+
+.addRoutineButton>button:hover {
+    border: 1px solid rgba(28, 28, 124, 0.699);
+}
+
+.routineModule {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.individualRoutine {
+    width: inherit;
+    display: flex;
+    padding: 10px;
+    /* border: 1px solid black; */
+    /* border-bottom: none; */
+}
+
+.timeSelection,
+.subjectNameInput {
+    margin: 10px;
+    font-size: 16px;
+    padding: 5.5px;
+    font-family: 'Unisans-Thin';
+    color: white;
+}
+
+.subjectNameInput {
+    background: none;
+    border: none;
+    border-bottom: 2px solid white;
+    text-transform: uppercase;
+}
+
+.subjectNameInput::placeholder {
+    color: white;
+}
+
+.timeSelection {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid white;
+}
+
+.timeSelection:focus {
+    border: none;
+    border-bottom: 2px solid white;
+}
+
+.timeSelection>option {
+    font-size: 14px;
+    opacity: 0.5;
+    background-color: rgba(28, 28, 124, 0.699);
+    color: white;
+}
+
+.timeSelection>option:hover {
+    background-color: rgba(28, 28, 124, 0.699);
+}
+
 #toRegisterLink>div {
     width: inherit;
     padding: 10px 0;
     /* background-color: rgba(128, 128, 128); */
 }
-
