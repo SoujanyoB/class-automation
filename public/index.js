@@ -21,6 +21,7 @@ for (i = 0; i < acc.length; i++) {
 // Script to add a div with class timing and subject name input
 
 var classTimingStart = ["8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM"];
+var subjectNames = [];
 var addRoutineButtons = document.getElementsByClassName('addRoutine');
 
 function addSelectOptions(value) {
@@ -43,8 +44,7 @@ function addRoutineOption(routineModule) {
 
     var selectOption = document.createElement('select');
     selectOption.setAttribute('class', 'timeSelection');
-    // selectOption.style.background = "none";
-    // selectOption.style
+
     var defaultOption = document.createElement('option');
     defaultOption.setAttribute('value', 'default');
     defaultOption.appendChild(document.createTextNode('Start Time'));
@@ -54,7 +54,6 @@ function addRoutineOption(routineModule) {
     for (i = 0; i < classTimingStart.length; i++) {
         selectOption.appendChild(addSelectOptions(classTimingStart[i]));
     }
-    // selectOption.appendChild()
 
     var div = document.createElement('div');
     div.setAttribute('class', 'individualRoutine');
@@ -66,20 +65,35 @@ function addRoutineOption(routineModule) {
 
 }
 
-function customizeBorder(routineModule) {
-    if (routineModule.children.length != 1) {
-        // routineModule.children[routineModule.children.length - 1].style.borderBottom = "1px solid black";
-    } else {
-        // routineModule.firstElementChild.style.border = "1px solid black";
+var subjectSelector = document.querySelector('select#subjectNameSelection');
+
+function findSubjectName(routineModule) {
+    var individualRoutines = routineModule.children;
+    for (i = 0; i < individualRoutines.length; i++) {
+        var value = individualRoutines[i].querySelector('input').value.toUpperCase();
+        if (subjectNames.length && !subjectNames.includes(value)) {
+            subjectNames.push(value);
+            subjectSelector.appendChild(addSelectOptions(value));
+        }
+        if (!subjectNames.length) {
+            subjectNames.push(value);
+            subjectSelector.appendChild(addSelectOptions(value));
+        }
     }
 }
+
+
+
+
+
 
 for (i = 0; i < addRoutineButtons.length; i++) {
     addRoutineButtons[i].addEventListener('click', e => {
         var routineModule = e.target.parentElement.previousElementSibling;
 
+        findSubjectName(routineModule);
         addRoutineOption(routineModule);
-        customizeBorder(routineModule);
+        // addSubjectSelectionOption();
 
         // console.log(routineModule);
     });

@@ -220,7 +220,7 @@ a:hover {
     width: auto;
     height: 92vh;
     display: grid;
-    grid-template-rows: 50% 50%;
+    grid-template-rows: 70% 30%;
 }
 
 .allowOverflow {
@@ -237,6 +237,9 @@ a:hover {
 /* Responsive shit  */
 
 @media only screen and (max-width: 800px) {
+    h2 {
+        font-size: 24px;
+    }
     .cardHolder {
         display: block;
     }
@@ -245,7 +248,7 @@ a:hover {
     }
     .individualRoutine {
         display: flex;
-        justify-content: center;
+        justify-content: space-evenly;
     }
     .timeSelection,
     .subjectNameInput {
@@ -253,5 +256,9 @@ a:hover {
     }
     .timeSelection>option {
         font-size: 10px;
+    }
+    .divideIntoTwo {
+        height: auto;
+        display: block;
     }
 }
