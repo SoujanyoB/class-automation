@@ -101,14 +101,15 @@ a:hover {
     width: inherit;
     height: auto;
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    /* flex-direction: column;
+    justify-content: space-evenly; */
 }
 
 .card {
     margin: 20px;
     border: 1px solid rgba(255, 255, 255, 0.5);
     padding: 10px;
+    flex: 1;
 }
 
 .accordion {
@@ -159,8 +160,9 @@ a:hover {
 }
 
 .individualRoutine {
-    width: inherit;
+    width: 100%;
     display: flex;
+    justify-content: space-around;
     padding: 10px;
     /* border: 1px solid black; */
     /* border-bottom: none; */
@@ -212,4 +214,44 @@ a:hover {
     width: inherit;
     padding: 10px 0;
     /* background-color: rgba(128, 128, 128); */
+}
+
+.divideIntoTwo {
+    width: auto;
+    height: 92vh;
+    display: grid;
+    grid-template-rows: 50% 50%;
+}
+
+.allowOverflow {
+    max-height: 92vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.allowOverflow::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Responsive shit  */
+
+@media only screen and (max-width: 800px) {
+    .cardHolder {
+        display: block;
+    }
+    button.addRoutine {
+        font-size: smaller;
+    }
+    .individualRoutine {
+        display: flex;
+        justify-content: center;
+    }
+    .timeSelection,
+    .subjectNameInput {
+        font-size: 10px;
+    }
+    .timeSelection>option {
+        font-size: 10px;
+    }
 }
