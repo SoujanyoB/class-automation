@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bunker</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body style="background-color: rgba(28, 28, 124, 0.699)">
     <div class="container">
-        <form action="/" method="POST">
+        <form action="/" method="POST" id="routineForm">
             <div class="cardHolder">
                 <div class="card allowOverflow fixedHeight">
                     <h2>1. ROUTINE:</h2>
                     <button class="accordion last" type="button">
-                        <span id="0">Monday</span>
+                        <span id="0" class="day">Monday</span>
                         <span class="icon">&plus;</span>
                     </button>
                     <div class="routine">
@@ -26,7 +27,7 @@
                     </div>
 
                     <button class="accordion last" type="button">
-                        <span id="1">Tuesday</span>
+                        <span id="1" class="day">Tuesday</span>
                         <span class="icon">&plus;</span>
                     </button>
                     <div class="routine">
@@ -37,7 +38,7 @@
                     </div>
 
                     <button class="accordion last" type="button">
-                        <span id="2">Wednesday</span>
+                        <span id="2" class="day">Wednesday</span>
                         <span class="icon">&plus;</span>
                     </button>
                     <div class="routine">
@@ -48,7 +49,7 @@
                     </div>
 
                     <button class="accordion last" type="button">
-                        <span id="3">Thursday</span>
+                        <span id="3" class="day">Thursday</span>
                         <span class="icon">&plus;</span>
                     </button>
                     <div class="routine">
@@ -59,7 +60,7 @@
                     </div>
 
                     <button class="accordion last" type="button">
-                        <span id="4">Friday</span>
+                        <span id="4" class="day">Friday</span>
                         <span class="icon">&plus;</span>
                     </button>
                     <div class="routine">
@@ -90,7 +91,9 @@
                     </div>
 
                 </div>
-
+            </div>
+            <div class="submitForm">
+                <button type="submit">Save</button>
             </div>
         </form>
     </div>

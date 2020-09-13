@@ -224,13 +224,18 @@ a:hover {
 
 .divideIntoTwo {
     width: auto;
-    height: 92vh;
+    height: 85vh;
     display: grid;
     grid-template-rows: 70% 30%;
 }
 
+.submitForm {
+    width: 100%;
+    text-align: center;
+}
+
 .fixedHeight {
-    max-height: 92vh;
+    max-height: 85vh;
 }
 
 .allowOverflow {

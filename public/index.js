@@ -43,6 +43,7 @@ function addRoutineOption(routineModule) {
     var input = document.createElement('input');
     input.setAttribute('type', 'text');
     input.setAttribute('class', 'subjectNameInput');
+    input.setAttribute('name', 'subjectName');
     input.setAttribute('placeholder', 'Subject Name');
 
     var selectOption = document.createElement('select');
