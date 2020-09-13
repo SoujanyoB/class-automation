@@ -13,6 +13,16 @@
     <div class="container">
         <div class="loginForm">
             <h1>Sign Up</h1>
+
+
+            <!-- this is not showing up  -->
+            <% if(typeof errors != 'undefined'){ %> 
+              <% errors.forEach(function(error) { %>
+               <%=error.msg %>
+               <% }); %>
+              
+              <% } %>
+            
             <form id="loginFormElement" method="POST" action="/register">
                 <div class="formElement"><input type="text" name="email" id="loginEmailInput" placeholder="Email or Phone"></div>
                 <div class="formElement"><input type="password" name="password" id="loginPasswordInput" placeholder="Password"></div>

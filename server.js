@@ -16,6 +16,7 @@ const port = 3000;
 const app = express();
 
 app.set('view-engine', ejs);
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use(express.static(path.join(__dirname, 'public/fonts')));
@@ -33,23 +34,55 @@ app.get('/register', (req, res) => {
 
 //Registering users
 app.post('/register', (req, res) => {
-
-    var body = _.pick(req.body, ['email', 'password']); //Picking email and password from the request
-
-    var user = new User(body); //New instance of user
-    //body already has email and password keys, so passed directly
-    user.save().then(() => { //Saving the user in the database
-        return user.generateAuthToken();
-    }).then((token) => {
-        res.header('x-auth', token).send('You are registered'); //token sent back as header
-    }).catch((err) => {
-        console.log(err);
-        res.status(400).send('Registration error');
-    });
-
-
-
-})
+    const { email, password, rePassword } = req.body;
+    let errors = [];
+    
+    if (!email || !password || !rePassword) {
+      errors.push({ msg: 'Please enter all fields' });
+    }
+  
+    if (password != rePassword) {
+      errors.push({ msg: 'Passwords do not match' });
+    }
+  
+    if (password.length < 6) {
+      errors.push({ msg: 'Password must be at least 6 characters' });
+    }
+  
+    if (errors.length > 0) {
+      res.render('register.ejs', {
+        errors,
+        email,
+        password,
+        rePassword
+      });
+    } else {
+      User.findOne({ email: email }).then((user) => {
+        if (user) {
+          errors.push({ msg: 'Email already exists' });
+          res.render('register.ejs', {
+            errors,
+            email,
+            password,
+            rePassword
+          });
+        } else {
+            var body = _.pick(req.body, ['email', 'password']); //Picking email and password from the request
+    
+            var user = new User(body); //New instance of user
+            //body already has email and password keys, so passed directly
+            user.save().then(() => { //Saving the user in the database
+                return user.generateAuthToken();
+            }).then((token) => {
+                res.header('x-auth', token).send('You are registered'); //token sent back as header
+            }).catch((err) => {
+                console.log('Some kind of error');
+                res.status(400).send('Registration error');
+            });
+        }
+      });
+    }
+  });
 
 //Logging in users
 app.post('/login', (req, res) => { //send email an password in the request
@@ -72,3 +105,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+
+
+
