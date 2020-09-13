@@ -37,6 +37,12 @@ button {
     ;
 }
 
+select:focus,
+input:focus,
+button:focus {
+    outline: none;
+}
+
 button:hover {
     cursor: pointer;
     background-color: rgba(28, 28, 124, 0.699);
@@ -223,14 +229,48 @@ a:hover {
     grid-template-rows: 70% 30%;
 }
 
-.allowOverflow {
+.fixedHeight {
     max-height: 92vh;
+}
+
+.allowOverflow {
     overflow-y: scroll;
     scrollbar-width: none;
 }
 
 .allowOverflow::-webkit-scrollbar {
     display: none;
+}
+
+.grid {
+    display: grid;
+    grid-template-rows: 10% 90%;
+}
+
+.links {
+    border: 1px solid rgb(255, 255, 255, 0.5);
+    margin: 5px;
+}
+
+.link {
+    display: grid;
+    grid-template-columns: 20% 70% 10%;
+}
+
+.removeLinkButton,
+.addLinkButton {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 5px;
+    margin: 10px;
+}
+
+.removeLinkButton:hover,
+.addLinkButton:hover {
+    border: 1px solid rgba(28, 28, 124, 0.699);
+}
+
+.last {
+    margin-bottom: 10px;
 }
 
 
@@ -260,5 +300,13 @@ a:hover {
     .divideIntoTwo {
         height: auto;
         display: block;
+    }
+    .link {
+        grid-template-columns: 30% 50% 20%;
+    }
+    button.addLinkButton {
+        font-size: smaller;
+        padding: 5px;
+        margin: 10px;
     }
 }

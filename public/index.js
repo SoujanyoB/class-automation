@@ -4,12 +4,15 @@ var i;
 for (i = 0; i < acc.length; i++) {
     acc[i].addEventListener("click", function() {
         this.classList.toggle("active");
+        this.classList.toggle('last');
         var icon = this.querySelector('span.icon');
         var routine = this.nextElementSibling;
         if (routine.style.display === "block") {
+            routine.classList.remove('last')
             routine.style.display = "none";
             icon.innerHTML = '&plus;';
         } else {
+            routine.classList.add('last');
             routine.style.display = "block";
             icon.innerHTML = '&minus;';
         }
@@ -98,3 +101,28 @@ for (i = 0; i < addRoutineButtons.length; i++) {
         // console.log(routineModule);
     });
 }
+
+
+
+// add Subject classroom link code
+var addClassroomLinkButton = document.querySelector('button.addLinkButton');
+addClassroomLinkButton.addEventListener('click', (e) => {
+    var parentNode = e.target.parentElement;
+    var clone = parentNode.cloneNode(true);
+
+    var button = clone.querySelector('button');
+    button.classList.remove('addLinkButton');
+    button.classList.add('removeLinkButton');
+    button.innerHTML = '&minus;';
+
+    button.addEventListener('click', e => {
+        e.target.parentElement.remove();
+    });
+
+    var grandpaNode = parentNode.parentElement;
+    grandpaNode.insertBefore(clone, parentNode);
+
+    parentNode.querySelector('input').value = "";
+
+
+});

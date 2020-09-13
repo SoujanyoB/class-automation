@@ -12,9 +12,9 @@
     <div class="container">
         <form action="/" method="POST">
             <div class="cardHolder">
-                <div class="card allowOverflow">
-                    <h2>ROUTINE:</h2>
-                    <button class="accordion" type="button">
+                <div class="card allowOverflow fixedHeight">
+                    <h2>1. ROUTINE:</h2>
+                    <button class="accordion last" type="button">
                         <span id="0">Monday</span>
                         <span class="icon">&plus;</span>
                     </button>
@@ -25,7 +25,7 @@
                         </div>
                     </div>
 
-                    <button class="accordion" type="button">
+                    <button class="accordion last" type="button">
                         <span id="1">Tuesday</span>
                         <span class="icon">&plus;</span>
                     </button>
@@ -36,7 +36,7 @@
                         </div>
                     </div>
 
-                    <button class="accordion" type="button">
+                    <button class="accordion last" type="button">
                         <span id="2">Wednesday</span>
                         <span class="icon">&plus;</span>
                     </button>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
 
-                    <button class="accordion" type="button">
+                    <button class="accordion last" type="button">
                         <span id="3">Thursday</span>
                         <span class="icon">&plus;</span>
                     </button>
@@ -58,7 +58,7 @@
                         </div>
                     </div>
 
-                    <button class="accordion" type="button">
+                    <button class="accordion last" type="button">
                         <span id="4">Friday</span>
                         <span class="icon">&plus;</span>
                     </button>
@@ -73,17 +73,20 @@
                 </div>
 
                 <div class="card divideIntoTwo">
-                    <div class="innerCard">
-                        <h2>Classroom Links:</h2>
-                        <div class="link">
-                            <select id="subjectNameSelection" class="timeSelection">
-                                <option value="default" selected>Subject</option>
-                            </select>
-                            <input type="text" name="subjectMeetLinkInput">
+                    <div class="innerCard grid allowOverflow">
+                        <h2>2. Classroom Links:</h2>
+                        <div class="links">
+                            <div class="link">
+                                <select id="subjectNameSelection" class="timeSelection">
+                                    <option value="default" selected>Subject</option>
+                                </select>
+                                <input type="text" name="subjectMeetLinkInput" class="subjectNameInput fillParent" placeholder="Google Classroom Link">
+                                <button type="button" class="addLinkButton">&plus;</button>
+                            </div>
                         </div>
                     </div>
                     <div class="innerCard">
-                        <h2>Something else:</h2>
+                        <h2>3. Something else:</h2>
                     </div>
 
                 </div>
