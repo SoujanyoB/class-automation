@@ -38,15 +38,16 @@ function addSelectOptions(value) {
 }
 
 
-function addRoutineOption(routineModule) {
+function addRoutineOption(routineModule, id) {
 
     var input = document.createElement('input');
     input.setAttribute('type', 'text');
     input.setAttribute('class', 'subjectNameInput');
-    input.setAttribute('name', 'subjectName');
+    input.setAttribute('name', `subjectName${id}`);
     input.setAttribute('placeholder', 'Subject Name');
 
     var selectOption = document.createElement('select');
+    selectOption.setAttribute('name', `subjectStartTime${id}`);
     selectOption.setAttribute('class', 'timeSelection');
 
     var defaultOption = document.createElement('option');
@@ -94,9 +95,10 @@ function findSubjectName(routineModule) {
 for (i = 0; i < addRoutineButtons.length; i++) {
     addRoutineButtons[i].addEventListener('click', e => {
         var routineModule = e.target.parentElement.previousElementSibling;
+        var id = routineModule.parentElement.previousElementSibling.querySelector('span.day').id;
 
         findSubjectName(routineModule);
-        addRoutineOption(routineModule);
+        addRoutineOption(routineModule, id);
         // addSubjectSelectionOption();
 
         // console.log(routineModule);
@@ -111,10 +113,14 @@ addClassroomLinkButton.addEventListener('click', (e) => {
     var parentNode = e.target.parentElement;
     var clone = parentNode.cloneNode(true);
 
+    clone.querySelector('select').selectedIndex = parentNode.querySelector('select').selectedIndex;
+
     var button = clone.querySelector('button');
     button.classList.remove('addLinkButton');
     button.classList.add('removeLinkButton');
     button.innerHTML = '&minus;';
+
+    parentNode.querySelector('select').selectedIndex = "0";
 
     button.addEventListener('click', e => {
         e.target.parentElement.remove();

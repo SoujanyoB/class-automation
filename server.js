@@ -36,53 +36,54 @@ app.get('/register', (req, res) => {
 app.post('/register', (req, res) => {
     const { email, password, rePassword } = req.body;
     let errors = [];
-    
+
     if (!email || !password || !rePassword) {
-      errors.push({ msg: 'Please enter all fields' });
+        errors.push({ msg: 'Please enter all fields' });
     }
-  
+
     if (password != rePassword) {
-      errors.push({ msg: 'Passwords do not match' });
+        errors.push({ msg: 'Passwords do not match' });
     }
-  
+
     if (password.length < 6) {
-      errors.push({ msg: 'Password must be at least 6 characters' });
+        errors.push({ msg: 'Password must be at least 6 characters' });
     }
-  
+
     if (errors.length > 0) {
-      res.render('register.ejs', {
-        errors,
-        email,
-        password,
-        rePassword
-      });
-    } else {
-      User.findOne({ email: email }).then((user) => {
-        if (user) {
-          errors.push({ msg: 'Email already exists' });
-          res.render('register.ejs', {
+        res.render('register.ejs', {
             errors,
             email,
             password,
             rePassword
-          });
-        } else {
-            var body = _.pick(req.body, ['email', 'password']); //Picking email and password from the request
-    
-            var user = new User(body); //New instance of user
-            //body already has email and password keys, so passed directly
-            user.save().then(() => { //Saving the user in the database
-                return user.generateAuthToken();
-            }).then((token) => {
-                res.header('x-auth', token).send('You are registered'); //token sent back as header
-            }).catch((err) => {
-                console.log('Some kind of error');
-                res.status(400).send('Registration error');
-            });
-        }
-      });
+        });
+    } else {
+        User.findOne({ email: email }).then((user) => {
+            if (user) {
+                errors.push({ msg: 'Email already exists' });
+                res.render('register.ejs', {
+                    errors,
+                    email,
+                    password,
+                    rePassword
+                });
+            } else {
+                var body = _.pick(req.body, ['email', 'password']); //Picking email and password from the request
+
+                var user = new User(body); //New instance of user
+                //body already has email and password keys, so passed directly
+                user.save().then(() => { //Saving the user in the database
+                    return user.generateAuthToken();
+                }).then((token) => {
+                    // res.header('x-auth', token).send('You are registered'); //token sent back as header
+                    res.redirect('/login');
+                }).catch((err) => {
+                    console.log('Some kind of error');
+                    res.status(400).send('Registration error');
+                });
+            }
+        });
     }
-  });
+});
 
 //Logging in users
 app.post('/login', (req, res) => { //send email an password in the request
@@ -92,7 +93,8 @@ app.post('/login', (req, res) => { //send email an password in the request
     User.findByCredentials(body.email, body.password).then((user) => { //verifying user with these credentials exists
 
         user.generateAuthToken().then((token) => { //generate token for user who logged in
-            res.header('x-auth', token).send('You are logged in'); //send token back in a header
+            // res.header('x-auth', token).send('You are logged in'); //send token back in a header
+            res.redirect('/');
         })
     }).catch((err) => {
         console.log(err);
@@ -104,8 +106,30 @@ app.get('/', (req, res) => {
     res.render('home.ejs');
 });
 
+app.post('/', (req, res) => {
+    var routine = {
+        monday: req.body.subjectName0,
+        tuesday: req.body.subjectName1,
+        wednesday: req.body.subjectName2,
+        thursday: req.body.subjectName3,
+        friday: req.body.subjectName4,
+    }
+
+    var links = {
+        monday: req.body.subjectStartTime0,
+        tuesday: req.body.subjectStartTime1,
+        wednesday: req.body.subjectStartTime2,
+        thursday: req.body.subjectStartTime3,
+        friday: req.body.subjectStartTime4
+    }
+
+    var meetSubjects = req.body.subjectNameSelection;
+    var meetLinks = req.body.subjectMeetLinkInput;
+
+    console.log(routine, '\n', links);
+    console.log(meetSubjects, meetLinks);
+
+    res.send('hello');
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
-
-
-
-
