@@ -1,8 +1,14 @@
-var acc = document.getElementsByClassName("accordion");
-var i;
+//Global variables
+var accordion = document.getElementsByClassName("accordion"); //For the vertical expansion menu
+var i, subjectNames = [];
+var classTimingStart = ["8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM"]; //For selection options
+var addRoutineButtons = document.getElementsByClassName('addRoutine'); //add routine button
+var subjectSelector = document.querySelector('select#subjectNameSelection');
 
-for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function() {
+
+//Code to enable the vertical expansion menu for the routines
+for (i = 0; i < accordion.length; i++) {
+    accordion[i].addEventListener("click", function() {
         this.classList.toggle("active");
         this.classList.toggle('last');
         var icon = this.querySelector('span.icon');
@@ -21,12 +27,7 @@ for (i = 0; i < acc.length; i++) {
 
 
 
-// Script to add a div with class timing and subject name input
-
-var classTimingStart = ["8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM"];
-var subjectNames = [];
-var addRoutineButtons = document.getElementsByClassName('addRoutine');
-
+//this code returns a value passed as an option to a select tag
 function addSelectOptions(value) {
     var option = document.createElement('option');
     // option.style.opacity = "0.5";
@@ -38,39 +39,23 @@ function addSelectOptions(value) {
 }
 
 
-function addRoutineOption(routineModule, id) {
+//this code adds 
+function addRoutineOption(routineModule, individualRoutine) {
+    var copy = individualRoutine.cloneNode(true);
+    copy.querySelector('select').selectedIndex = individualRoutine.querySelector('select').selectedIndex;
 
-    var input = document.createElement('input');
-    input.setAttribute('type', 'text');
-    input.setAttribute('class', 'subjectNameInput');
-    input.setAttribute('name', `subjectName${id}`);
-    input.setAttribute('placeholder', 'Subject Name');
+    var button = copy.querySelector('button');
+    button.innerHTML = '&minus;';
+    button.addEventListener('click', e => {
+        e.target.parentElement.parentElement.remove();
+    });
 
-    var selectOption = document.createElement('select');
-    selectOption.setAttribute('name', `subjectStartTime${id}`);
-    selectOption.setAttribute('class', 'timeSelection');
-
-    var defaultOption = document.createElement('option');
-    defaultOption.setAttribute('value', 'default');
-    defaultOption.appendChild(document.createTextNode('Start Time'));
-    defaultOption.setAttribute('selected', 'selected');
-
-    selectOption.appendChild(defaultOption);
-    for (i = 0; i < classTimingStart.length; i++) {
-        selectOption.appendChild(addSelectOptions(classTimingStart[i]));
-    }
-
-    var div = document.createElement('div');
-    div.setAttribute('class', 'individualRoutine');
-    div.style.borderBottom = "none";
-    div.appendChild(selectOption);
-    div.appendChild(input);
-
-    routineModule.appendChild(div);
-
+    routineModule.insertBefore(copy, individualRoutine);
+    individualRoutine.querySelector('select').selectedIndex = "0";
+    individualRoutine.querySelector('input').value = "";
 }
 
-var subjectSelector = document.querySelector('select#subjectNameSelection');
+
 
 function findSubjectName(routineModule) {
     var individualRoutines = routineModule.children;
@@ -91,17 +76,14 @@ function findSubjectName(routineModule) {
 
 
 
-
+// this code adds a click event listener to each of the addRoutine Buttons
 for (i = 0; i < addRoutineButtons.length; i++) {
     addRoutineButtons[i].addEventListener('click', e => {
-        var routineModule = e.target.parentElement.previousElementSibling;
-        var id = routineModule.parentElement.previousElementSibling.querySelector('span.day').id;
+        var individualRoutine = e.target.parentElement.parentElement;
+        var routineModule = individualRoutine.parentElement;
 
         findSubjectName(routineModule);
-        addRoutineOption(routineModule, id);
-        // addSubjectSelectionOption();
-
-        // console.log(routineModule);
+        addRoutineOption(routineModule, individualRoutine);
     });
 }
 
