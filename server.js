@@ -13,9 +13,11 @@ var { authenticate } = require('./server/middleware/authenticate');
 // const port = process.env || 3000;
 const port = 3000;
 
+var day = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+
 const app = express();
 
-app.set('view-engine', ejs);
+app.set('view-engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -107,29 +109,37 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-    var routine = {
-        monday: req.body.subjectName0,
-        tuesday: req.body.subjectName1,
-        wednesday: req.body.subjectName2,
-        thursday: req.body.subjectName3,
-        friday: req.body.subjectName4,
-    }
+    var routine = [
+        req.body.subjectName0,
+        req.body.subjectName1,
+        req.body.subjectName2,
+        req.body.subjectName3,
+        req.body.subjectName4,
+    ]
 
-    var links = {
-        monday: req.body.subjectStartTime0,
-        tuesday: req.body.subjectStartTime1,
-        wednesday: req.body.subjectStartTime2,
-        thursday: req.body.subjectStartTime3,
-        friday: req.body.subjectStartTime4
-    }
+    var startTime = [
+        req.body.subjectStartTime0,
+        req.body.subjectStartTime1,
+        req.body.subjectStartTime2,
+        req.body.subjectStartTime3,
+        req.body.subjectStartTime4
+    ]
 
     var meetSubjects = req.body.subjectNameSelection;
     var meetLinks = req.body.subjectMeetLinkInput;
 
-    console.log(routine, '\n', links);
-    console.log(meetSubjects, meetLinks);
+    // console.log(routine, '\n', startTime);
+    // console.log(meetSubjects, meetLinks);
 
-    res.send('hello');
+    console.log(day);
+
+    res.render('savedRoutine.ejs', {
+        day: day,
+        routine: routine,
+        startTime: startTime,
+        meetSubjects: meetSubjects,
+        meetLinks: meetLinks
+    });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

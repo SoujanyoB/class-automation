@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bunker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body style="background-color: rgba(28, 28, 124, 0.699);">
+    <div class="container">
+        <div class="cardHolder">
+            <div class="card allowOverflow fixedHeight">
+                <h2>Routine</h2>
+                <% for(var i = 0; i< day.length; i++) { %>
+                    <button class="accordion last" type="button">
+                        <span id="<%= i %>" class="day"><%= day[i] %></span>
+                        <span class="icon">&plus;</span>
+                    </button>
+                    <div class="routine">
+                        <div class="routineModule">
+                            <table>
+                                <tr>
+                                    <th>Start Time</th>
+                                    <th>Subject</th>
+                                </tr>
+                                <% for(var j = 0; j< routine[i].length; i++) { %>
+                                    <tr>
+                                        <td>
+                                            <%= startTime[i][j] %>
+                                        </td>
+                                        <td>
+                                            <%= routine[i][j] %>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                            </table>
+
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+            <div class="card"></div>
+        </div>
+    </div>
+
+
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="index.js"></script>
+</body>
+
+</html>
