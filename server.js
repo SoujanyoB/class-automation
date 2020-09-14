@@ -96,7 +96,7 @@ app.post('/login', (req, res) => { //send email an password in the request
 
         user.generateAuthToken().then((token) => { //generate token for user who logged in
             // res.header('x-auth', token).send('You are logged in'); //send token back in a header
-            res.header('x-auth', token).redirect('/'+token);
+            res.header('x-auth', token).redirect('/' + token);
         })
     }).catch((err) => {
         console.log(err);
@@ -104,16 +104,15 @@ app.post('/login', (req, res) => { //send email an password in the request
     });
 })
 
-app.get('/', (req,res)=>{
-  res.send('Please sign up or login to view the home page')
+app.get('/', (req, res) => {
+    res.send('Please sign up or login to view the home page')
 })
 
-app.get('/:token',authenticate, (req, res) => {
+app.get('/:token', authenticate, (req, res) => {
     res.render('home.ejs');
 });
 
-<<<<<<< HEAD
-app.post('/', (req, res) => {
+app.post('/:token', authenticate, (req, res) => {
     var routine = [
         req.body.subjectName0,
         req.body.subjectName1,
@@ -122,31 +121,13 @@ app.post('/', (req, res) => {
         req.body.subjectName4,
     ]
 
-    var startTime = [
+    var links = [
         req.body.subjectStartTime0,
         req.body.subjectStartTime1,
         req.body.subjectStartTime2,
         req.body.subjectStartTime3,
         req.body.subjectStartTime4
     ]
-=======
-app.post('/:token',authenticate, (req, res) => {
-    var routine = {
-        monday: req.body.subjectName0,
-        tuesday: req.body.subjectName1,
-        wednesday: req.body.subjectName2,
-        thursday: req.body.subjectName3,
-        friday: req.body.subjectName4,
-    }
-
-    var links = {
-        monday: req.body.subjectStartTime0,
-        tuesday: req.body.subjectStartTime1,
-        wednesday: req.body.subjectStartTime2,
-        thursday: req.body.subjectStartTime3,
-        friday: req.body.subjectStartTime4
-    }
->>>>>>> 224a8d9c7fd8baca46cd6830153dc85c65eea9a8
 
     var meetSubjects = req.body.subjectNameSelection;
     var meetLinks = req.body.subjectMeetLinkInput;
