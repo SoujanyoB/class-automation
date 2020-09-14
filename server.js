@@ -75,7 +75,7 @@ app.post('/register', (req, res) => {
                     return user.generateAuthToken();
                 }).then((token) => {
                     // res.header('x-auth', token).send('You are registered'); //token sent back as header
-                    res.redirect('/login');
+                    res.header('x-auth', token).redirect('/login');
                 }).catch((err) => {
                     console.log('Some kind of error');
                     res.status(400).send('Registration error');
@@ -94,7 +94,7 @@ app.post('/login', (req, res) => { //send email an password in the request
 
         user.generateAuthToken().then((token) => { //generate token for user who logged in
             // res.header('x-auth', token).send('You are logged in'); //send token back in a header
-            res.redirect('/');
+            res.header('x-auth', token).redirect('/'+token);
         })
     }).catch((err) => {
         console.log(err);
@@ -102,7 +102,7 @@ app.post('/login', (req, res) => { //send email an password in the request
     });
 })
 
-app.get('/', (req, res) => {
+app.get('/:token',authenticate, (req, res) => {
     res.render('home.ejs');
 });
 

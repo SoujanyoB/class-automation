@@ -2,8 +2,8 @@ var {User}=require('./../models/user');
 
     var authenticate=(req,res,next)=>{
 
-        var token = req.header('x-auth');         //gets value of token, (key=x-auth) while res.header sets value
-
+        var token = req.params.token;         //gets value of token, (key=x-auth) while res.header sets value
+        console.log("token is "+token);
         User.findByToken(token).then((user) => {    
             if(!user)
             {
@@ -13,7 +13,7 @@ var {User}=require('./../models/user');
             req.token=token;
             next();                               //everything went well, so app can continue
         }).catch((err) => {
-            res.status(401).send();               //jwt not verified
+            res.status(401).send('You are not authorized');               //jwt not verified
         });
     }
 
