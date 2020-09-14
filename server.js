@@ -102,11 +102,15 @@ app.post('/login', (req, res) => { //send email an password in the request
     });
 })
 
+app.get('/', (req,res)=>{
+  res.send('Please sign up or login to view the home page')
+})
+
 app.get('/:token',authenticate, (req, res) => {
     res.render('home.ejs');
 });
 
-app.post('/', (req, res) => {
+app.post('/:token',authenticate, (req, res) => {
     var routine = {
         monday: req.body.subjectName0,
         tuesday: req.body.subjectName1,

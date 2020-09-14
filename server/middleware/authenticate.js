@@ -13,7 +13,7 @@ var {User}=require('./../models/user');
             req.token=token;
             next();                               //everything went well, so app can continue
         }).catch((err) => {
-            res.status(401).send('You are not authorized');               //jwt not verified
+            res.status(401).send('Please sign up or log in to view the home page');               //jwt not verified
         });
     }
 
