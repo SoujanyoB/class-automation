@@ -10,11 +10,11 @@
 
 <body style="background-color: rgba(28, 28, 124, 0.699)">
     <div class="container">
-        <form action="/" method="POST" id="routineForm">
+        <form action="/<%=token%>" method="POST" id="routineForm">
             <div class="cardHolder">
                 <div class="card allowOverflow fixedHeight">
                     <h2>1. ROUTINE:</h2>
-                    <form action="/" method="post">
+                    <form action="/<%=token%>" method="post">
                         <button class="accordion last" type="button">
                             <span id="0" class="day">Monday</span>
                             <span class="icon">&plus;</span>
