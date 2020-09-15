@@ -3,7 +3,6 @@ var {User}=require('./../models/user');
     var authenticate=(req,res,next)=>{
 
         var token = req.params.token;         //gets value of token, (key=x-auth) while res.header sets value
-        console.log("token is "+token);
         User.findByToken(token).then((user) => {    
             if(!user)
             {

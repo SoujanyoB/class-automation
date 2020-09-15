@@ -109,7 +109,9 @@ app.get('/', (req, res) => {
 })
 
 app.get('/:token', authenticate, (req, res) => {
-    res.render('home.ejs');
+
+    console.log("token aya"+req.params.token);
+    res.render('home.ejs',{token:req.params.token});
 });
 
 app.post('/:token', authenticate, (req, res) => {
@@ -121,7 +123,7 @@ app.post('/:token', authenticate, (req, res) => {
         req.body.subjectName4,
     ]
 
-    var links = [
+    var startTime = [//changed name of this variable
         req.body.subjectStartTime0,
         req.body.subjectStartTime1,
         req.body.subjectStartTime2,
