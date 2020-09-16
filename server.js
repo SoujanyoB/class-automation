@@ -7,6 +7,7 @@ const _ = require('lodash')
 const { mongoose } = require('./server/db/mongoose');
 
 const { User } = require('./server/models/user'); //Requiring User model
+const {Routine}= require('./server/models/routine')
 var { authenticate } = require('./server/middleware/authenticate');
 // const fs = require('fs');
 
@@ -134,6 +135,13 @@ app.post('/:token', authenticate, (req, res) => {
     var meetSubjects = req.body.subjectNameSelection;
     var meetLinks = req.body.subjectMeetLinkInput;
 
+    //check this
+    //*************************************************** */
+    var body=_.pick(req.body, ['subjectStartTime0', 'subjectName0']);
+    console.log(body);
+    //***************************************************** */
+
+   
 
     res.render('savedRoutine.ejs', {
         day: day,
