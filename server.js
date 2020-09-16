@@ -110,8 +110,8 @@ app.get('/', (req, res) => {
 
 app.get('/:token', authenticate, (req, res) => {
 
-    console.log("token aya"+req.params.token);
-    res.render('home.ejs',{token:req.params.token});
+    console.log("token aya" + req.params.token);
+    res.render('home.ejs', { token: req.params.token });
 });
 
 app.post('/:token', authenticate, (req, res) => {
@@ -123,7 +123,7 @@ app.post('/:token', authenticate, (req, res) => {
         req.body.subjectName4,
     ]
 
-    var startTime = [//changed name of this variable
+    var startTime = [ //changed name of this variable
         req.body.subjectStartTime0,
         req.body.subjectStartTime1,
         req.body.subjectStartTime2,
@@ -134,17 +134,14 @@ app.post('/:token', authenticate, (req, res) => {
     var meetSubjects = req.body.subjectNameSelection;
     var meetLinks = req.body.subjectMeetLinkInput;
 
-    // console.log(routine, '\n', startTime);
-    // console.log(meetSubjects, meetLinks);
-
-    console.log(day);
 
     res.render('savedRoutine.ejs', {
         day: day,
         routine: routine,
         startTime: startTime,
         meetSubjects: meetSubjects,
-        meetLinks: meetLinks
+        meetLinks: meetLinks,
+        token: req.params.token
     });
 });
 

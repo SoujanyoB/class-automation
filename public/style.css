@@ -65,6 +65,11 @@ h2 {
     margin-bottom: 20px;
 }
 
+h4 {
+    width: 100%;
+    text-align: center;
+}
+
 a {
     text-decoration: none;
     color: black;
@@ -75,6 +80,17 @@ a {
 a:hover {
     background-color: rgba(28, 28, 124, 0.699);
     color: white;
+}
+
+table {
+    width: 100%;
+    /* border: 1px solid black; */
+    text-align: left;
+}
+
+th,
+td {
+    text-align: center;
 }
 
 .container {
@@ -241,7 +257,7 @@ a:hover {
 }
 
 .fixedHeight {
-    max-height: 85vh;
+    height: 85vh;
 }
 
 .allowOverflow {
@@ -290,6 +306,40 @@ button.doneRoutine {
     height: 48px;
     text-align: center;
     padding: 0;
+}
+
+.footer {
+    width: 98.5%;
+    position: fixed;
+    bottom: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.social,
+.websiteAdditional {
+    display: flex;
+    align-items: center;
+}
+
+.footer>div>span {
+    font-size: x-large;
+    background: none;
+    border: none;
+    padding: 0 2px;
+}
+
+.footer>div>span>a {
+    border: none;
+    text-decoration: none;
+    outline: none;
+}
+
+.footer>div>span>a:hover {
+    background: transparent;
+    outline: none;
 }
 
 
