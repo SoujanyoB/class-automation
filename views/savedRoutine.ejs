@@ -25,20 +25,31 @@
                                     <th>Start Time</th>
                                     <th>Subject</th>
                                 </tr>
-                                <% for(var j = 0; j< routine[i].length; j++) { %>
-                                    <% if(routine[i][j] == '')  { %>
-                                        <% continue; %>
-                                            <% } else { %>
-                                                <tr class="unisansThin">
-                                                    <td>
-                                                        <%= startTime[i][j] %>
-                                                    </td>
-                                                    <td>
-                                                        <%= routine[i][j] %>
-                                                    </td>
-                                                </tr>
-                                                <% } %>
-                                                    <% } %>
+                                <% if(typeof(routine[i]) === 'string' && routine[i].toLowerCase() != '') { %>
+                                    <tr class="unisansThin">
+                                        <td>
+                                            <%= startTime[i] %>
+                                        </td>
+                                        <td>
+                                            <%= routine[i] %>
+                                        </td>
+                                    </tr>
+                                    <% } else { %>
+                                        <% for(var j = 0; j< routine[i].length; j++) { %>
+                                            <% if(routine[i][j] == '')  { %>
+                                                <% continue; %>
+                                                    <% } else { %>
+                                                        <tr class="unisansThin">
+                                                            <td>
+                                                                <%= startTime[i][j] %>
+                                                            </td>
+                                                            <td>
+                                                                <%= routine[i][j] %>
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+                                                            <% } %>
+                                                                <% } %>
                             </table>
                             <% } else { %>
                                 <h4 class="unisansThin">Empty!</h4>
@@ -66,6 +77,8 @@
                 <span><a href="#">Advanced Settings</a></span>
                 <span>&vert;</span>
                 <span><a href="/<%= token %>">Edit</a></span>
+                <span>&vert;</span>
+                <span class="logout"><a href="/login">Logout</a></span>
             </div>
 
         </div>
