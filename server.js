@@ -135,24 +135,68 @@ app.post('/:token', authenticate, (req, res) => {
     var meetSubjects = req.body.subjectNameSelection;
     var meetLinks = req.body.subjectMeetLinkInput;
 
-    //check this
-    //*************************************************** */
-    var body=_.pick(req.body, ['subjectStartTime0', 'subjectName0']);
-    // console.log(body.subjectStartTime0.length);
-    //******************************************************/
+    
+    var body0=_.pick(req.body, ['subjectStartTime0', 'subjectName0']);
+    var body1=_.pick(req.body, ['subjectStartTime1', 'subjectName1']);
+    var body2=_.pick(req.body, ['subjectStartTime2', 'subjectName2']);
+    var body3=_.pick(req.body, ['subjectStartTime3', 'subjectName3']);
+    var body4=_.pick(req.body, ['subjectStartTime4', 'subjectName4']);
+    
 
 
     var routineObj= new Routine ({
         _creator:"Ayon"
     })
-    var length0=body.subjectStartTime0.length;
 
+
+    var length0=body0.subjectStartTime0.length;
+    var length1=body1.subjectStartTime1.length;
+    var length2=body2.subjectStartTime2.length;
+    var length3=body3.subjectStartTime3.length;
+    var length4=body4.subjectStartTime4.length;
+
+
+    var subjects0=[];
     for (let i = 0; i < length0; i++) {
-        const subjectStartTime = body.subjectStartTime0[i];
-        const subjectName = body.subjectName0[i];
-
-        routineObj.subjects.push({subjectName,subjectStartTime});
+        const subjectStartTime = body0.subjectStartTime0[i];
+        const subjectName = body0.subjectName0[i];
+        subjects0.push({subjectName,subjectStartTime})
     }
+    routineObj.subjectsArr.push({subjects:subjects0});
+
+    var subjects1=[];
+    for (let i = 0; i < length1; i++) {
+        const subjectStartTime = body1.subjectStartTime1[i];
+        const subjectName = body1.subjectName1[i];
+        subjects1.push({subjectName,subjectStartTime})
+    }
+    routineObj.subjectsArr.push({subjects:subjects1});
+
+    var subjects2=[];
+    for (let i = 0; i < length2; i++) {
+        const subjectStartTime = body2.subjectStartTime2[i];
+        const subjectName = body2.subjectName2[i];
+        subjects2.push({subjectName,subjectStartTime})
+    }
+    routineObj.subjectsArr.push({subjects:subjects2});
+
+    var subjects3=[];
+    for (let i = 0; i < length3; i++) {
+        const subjectStartTime = body3.subjectStartTime3[i];
+        const subjectName = body3.subjectName3[i];
+        subjects3.push({subjectName,subjectStartTime})
+    }
+    routineObj.subjectsArr.push({subjects:subjects3});
+
+    var subjects4=[];
+    for (let i = 0; i < length4; i++) {
+        const subjectStartTime = body4.subjectStartTime4[i];
+        const subjectName = body4.subjectName4[i];
+        subjects4.push({subjectName,subjectStartTime})
+    }
+    routineObj.subjectsArr.push({subjects:subjects4});
+
+    
 
     routineObj.save().then((doc) => {
         console.log("data saved");
