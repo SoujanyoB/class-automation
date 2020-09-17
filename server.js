@@ -138,8 +138,29 @@ app.post('/:token', authenticate, (req, res) => {
     //check this
     //*************************************************** */
     var body=_.pick(req.body, ['subjectStartTime0', 'subjectName0']);
-    console.log(body);
-    //***************************************************** */
+    // console.log(body.subjectStartTime0.length);
+    //******************************************************/
+
+
+    var routineObj= new Routine ({
+        _creator:"Ayon"
+    })
+    var length0=body.subjectStartTime0.length;
+
+    for (let i = 0; i < length0; i++) {
+        const subjectStartTime = body.subjectStartTime0[i];
+        const subjectName = body.subjectName0[i];
+
+        routineObj.subjects.push({subjectName,subjectStartTime});
+    }
+
+    routineObj.save().then((doc) => {
+        console.log("data saved");
+    }).catch((err) => {
+        console.log(err)
+    });
+
+
 
    
 
