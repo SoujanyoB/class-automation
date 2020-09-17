@@ -7,8 +7,9 @@ const _ = require('lodash')
 const { mongoose } = require('./server/db/mongoose');
 
 const { User } = require('./server/models/user'); //Requiring User model
-const {Routine}= require('./server/models/routine')
+const { Routine } = require('./server/models/routine')
 var { authenticate } = require('./server/middleware/authenticate');
+const { string } = require('yargs');
 // const fs = require('fs');
 
 // const port = process.env || 3000;
@@ -111,7 +112,7 @@ app.get('/', (req, res) => {
 
 app.get('/:token', authenticate, (req, res) => {
 
-    console.log("token aya" + req.params.token);
+    // console.log("token aya" + req.params.token);
     res.render('home.ejs', { token: req.params.token });
 });
 
@@ -206,7 +207,6 @@ app.post('/:token', authenticate, (req, res) => {
 
 
 
-   
 
     res.render('savedRoutine.ejs', {
         day: day,

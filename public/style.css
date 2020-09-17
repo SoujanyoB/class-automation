@@ -86,11 +86,13 @@ table {
     width: 100%;
     /* border: 1px solid black; */
     text-align: left;
+    direction: ltr;
 }
 
 th,
 td {
     text-align: center;
+    direction: ltr;
 }
 
 .container {

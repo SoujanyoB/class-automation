@@ -4,6 +4,8 @@ var i, subjectNames = [];
 var classTimingStart = ["8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM"]; //For selection options
 var addRoutineButtons = document.getElementsByClassName('addRoutine'); //add routine button
 var subjectSelector = document.querySelector('select#subjectNameSelection');
+var doneRoutineButtons = document.getElementsByClassName('doneRoutine');
+var addClassroomLinkButton = document.querySelector('button.addLinkButton');
 
 
 //Code to enable the vertical expansion menu for the routines
@@ -44,10 +46,20 @@ function addRoutineOption(routineModule, individualRoutine) {
     var copy = individualRoutine.cloneNode(true);
     copy.querySelector('select').selectedIndex = individualRoutine.querySelector('select').selectedIndex;
 
-    var button = copy.querySelector('button');
+    var button = copy.querySelector('button.addRoutine');
     button.innerHTML = '&minus;';
     button.addEventListener('click', e => {
         e.target.parentElement.parentElement.remove();
+
+
+        subjectNames.splice(subjectNames.indexOf(copy.querySelector('input').value.toUpperCase()), 1);
+        findSubjectName(routineModule);
+    });
+
+    copy.querySelector('button.doneRoutine').setAttribute('disabled', 'true');
+    copy.querySelector('button.doneRoutine').style.opacity = "0";
+    copy.querySelector('button.doneRoutine').addEventListener('mouseover', () => {
+        copy.querySelector('button.doneRoutine').style.cursor = "default";
     });
 
     routineModule.insertBefore(copy, individualRoutine);
@@ -55,25 +67,41 @@ function addRoutineOption(routineModule, individualRoutine) {
     individualRoutine.querySelector('input').value = "";
 }
 
-
+function addSubject() {
+    if (subjectSelector.children.length > 1) {
+        i = 1;
+        while (i != subjectSelector.children.length) {
+            subjectSelector.children[i].remove();
+        }
+    }
+    for (i = 0; i < subjectNames.length; i++) {
+        subjectSelector.appendChild(addSelectOptions(subjectNames[i]));
+    }
+}
 
 function findSubjectName(routineModule) {
     var individualRoutines = routineModule.children;
     for (i = 0; i < individualRoutines.length; i++) {
         var value = individualRoutines[i].querySelector('input').value.toUpperCase();
-        if (subjectNames.length && !subjectNames.includes(value)) {
+        if (subjectNames.length && !subjectNames.includes(value) && value != '') {
             subjectNames.push(value);
-            subjectSelector.appendChild(addSelectOptions(value));
         }
-        if (!subjectNames.length) {
+        if (!subjectNames.length && value != '') {
             subjectNames.push(value);
-            subjectSelector.appendChild(addSelectOptions(value));
         }
     }
+    addSubject();
 }
 
 
 
+//this code adds subject names to select option in classroom links
+for (i = 0; i < doneRoutineButtons.length; i++) {
+    doneRoutineButtons[i].addEventListener('click', e => {
+        findSubjectName(e.target.parentElement.parentElement.parentElement);
+    });
+
+}
 
 
 // this code adds a click event listener to each of the addRoutine Buttons
@@ -81,16 +109,18 @@ for (i = 0; i < addRoutineButtons.length; i++) {
     addRoutineButtons[i].addEventListener('click', e => {
         var individualRoutine = e.target.parentElement.parentElement;
         var routineModule = individualRoutine.parentElement;
+        // var doneRoutineButton = e.target.previousElementSibling;
 
-        findSubjectName(routineModule);
+
         addRoutineOption(routineModule, individualRoutine);
+        findSubjectName(routineModule);
+
     });
 }
 
 
 
 // add Subject classroom link code
-var addClassroomLinkButton = document.querySelector('button.addLinkButton');
 addClassroomLinkButton.addEventListener('click', (e) => {
     var parentNode = e.target.parentElement;
     var clone = parentNode.cloneNode(true);
