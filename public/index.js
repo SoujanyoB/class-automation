@@ -49,11 +49,27 @@ function addRoutineOption(routineModule, individualRoutine) {
     var button = copy.querySelector('button.addRoutine');
     button.innerHTML = '&minus;';
     button.addEventListener('click', e => {
+
+
+        var flag = true;
+        var subjectName = e.target.parentElement.parentElement.querySelector('input').value;
         e.target.parentElement.parentElement.remove();
 
+        var routineSubjects = document.querySelectorAll('input.subjectNameInput');
 
-        subjectNames.splice(subjectNames.indexOf(copy.querySelector('input').value.toUpperCase()), 1);
+        for (var j = 0; j < routineSubjects.length; j++) {
+            if (routineSubjects[i].value == subjectName && routineSubjects.parentElement.class == 'individualRoutine') {
+                flag = false;
+                break;
+            }
+        }
+
+        if (flag) {
+            subjectNames.splice(subjectNames.indexOf(copy.querySelector('input').value.toUpperCase()), 1);
+        }
         findSubjectName(routineModule);
+
+
     });
 
     copy.querySelector('button.doneRoutine').setAttribute('disabled', 'true');
@@ -111,10 +127,12 @@ for (i = 0; i < addRoutineButtons.length; i++) {
         var routineModule = individualRoutine.parentElement;
         // var doneRoutineButton = e.target.previousElementSibling;
 
+        // console.log(individualRoutine.querySelector('input').value, individualRoutine.querySelector('select').value);
 
-        addRoutineOption(routineModule, individualRoutine);
-        findSubjectName(routineModule);
-
+        if (individualRoutine.querySelector('input').value != '' && individualRoutine.querySelector('select').value != 'default') {
+            addRoutineOption(routineModule, individualRoutine);
+            findSubjectName(routineModule);
+        }
     });
 }
 
@@ -145,3 +163,13 @@ addClassroomLinkButton.addEventListener('click', (e) => {
 
 
 });
+
+
+// This code makes add subject button disabled without filling up both values
+// for (i = 0; i < selectionOptions.length; i++) {
+//     selectionOptions[i].addEventListener('change', e => {
+//         var parent = e.target.parentElement;
+//         var input =
+//             // console.log(e.target);
+//     });
+// }

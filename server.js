@@ -116,6 +116,7 @@ app.get('/:token', authenticate, (req, res) => {
     res.render('home.ejs', { token: req.params.token });
 });
 
+
 app.post('/:token', authenticate, (req, res) => {
     var routine = [
         req.body.subjectName0,
