@@ -93,21 +93,34 @@ app.post('/register', (req, res) => {
 app.post('/login', (req, res) => { //send email an password in the request
 
     var body = _.pick(req.body, ['email', 'password']);
+    let error;
+    if (!body.email || !body.password) {
+        error = 'Enter a valid email and password!';
+    }
 
-    User.findByCredentials(body.email, body.password).then((user) => { //verifying user with these credentials exists
 
-        user.generateAuthToken().then((token) => { //generate token for user who logged in
-            // res.header('x-auth', token).send('You are logged in'); //send token back in a header
-            res.header('x-auth', token).redirect('/' + token);
-        })
-    }).catch((err) => {
-        console.log(err);
-        res.status(400).send('Login error');
-    });
+    if (error) {
+        res.render('login.ejs', { error: error });
+    } else {
+        User.findByCredentials(body.email, body.password).then((user) => { //verifying user with these credentials exists
+
+            user.generateAuthToken().then((token) => { //generate token for user who logged in
+                // res.header('x-auth', token).send('You are logged in'); //send token back in a header
+                res.header('x-auth', token).redirect('/' + token);
+            })
+        }).catch((err) => {
+            // console.log(err);
+            console.log(err);
+            res.render('login.ejs', { error: 'Email or password does not match!' });
+            // res.status(400).send('Login error');
+        });
+    }
+
+
 })
 
 app.get('/', (req, res) => {
-    res.send('Please sign up or login to view the home page')
+    res.redirect('/login');
 });
 
 app.get('/:token', authenticate, (req, res) => {
@@ -137,68 +150,68 @@ app.post('/:token', authenticate, (req, res) => {
     var meetSubjects = req.body.subjectNameSelection;
     var meetLinks = req.body.subjectMeetLinkInput;
 
-    
-    var body0=_.pick(req.body, ['subjectStartTime0', 'subjectName0']);
-    var body1=_.pick(req.body, ['subjectStartTime1', 'subjectName1']);
-    var body2=_.pick(req.body, ['subjectStartTime2', 'subjectName2']);
-    var body3=_.pick(req.body, ['subjectStartTime3', 'subjectName3']);
-    var body4=_.pick(req.body, ['subjectStartTime4', 'subjectName4']);
-    
+
+    var body0 = _.pick(req.body, ['subjectStartTime0', 'subjectName0']);
+    var body1 = _.pick(req.body, ['subjectStartTime1', 'subjectName1']);
+    var body2 = _.pick(req.body, ['subjectStartTime2', 'subjectName2']);
+    var body3 = _.pick(req.body, ['subjectStartTime3', 'subjectName3']);
+    var body4 = _.pick(req.body, ['subjectStartTime4', 'subjectName4']);
 
 
-    var routineObj= new Routine ({
-        _creator:"Ayon"
+
+    var routineObj = new Routine({
+        _creator: "Ayon"
     })
 
 
-    var length0=body0.subjectStartTime0.length;
-    var length1=body1.subjectStartTime1.length;
-    var length2=body2.subjectStartTime2.length;
-    var length3=body3.subjectStartTime3.length;
-    var length4=body4.subjectStartTime4.length;
+    var length0 = body0.subjectStartTime0.length;
+    var length1 = body1.subjectStartTime1.length;
+    var length2 = body2.subjectStartTime2.length;
+    var length3 = body3.subjectStartTime3.length;
+    var length4 = body4.subjectStartTime4.length;
 
 
-    var subjects0=[];
+    var subjects0 = [];
     for (let i = 0; i < length0; i++) {
         const subjectStartTime = body0.subjectStartTime0[i];
         const subjectName = body0.subjectName0[i];
-        subjects0.push({subjectName,subjectStartTime})
+        subjects0.push({ subjectName, subjectStartTime })
     }
-    routineObj.subjectsArr.push({subjects:subjects0});
+    routineObj.subjectsArr.push({ subjects: subjects0 });
 
-    var subjects1=[];
+    var subjects1 = [];
     for (let i = 0; i < length1; i++) {
         const subjectStartTime = body1.subjectStartTime1[i];
         const subjectName = body1.subjectName1[i];
-        subjects1.push({subjectName,subjectStartTime})
+        subjects1.push({ subjectName, subjectStartTime })
     }
-    routineObj.subjectsArr.push({subjects:subjects1});
+    routineObj.subjectsArr.push({ subjects: subjects1 });
 
-    var subjects2=[];
+    var subjects2 = [];
     for (let i = 0; i < length2; i++) {
         const subjectStartTime = body2.subjectStartTime2[i];
         const subjectName = body2.subjectName2[i];
-        subjects2.push({subjectName,subjectStartTime})
+        subjects2.push({ subjectName, subjectStartTime })
     }
-    routineObj.subjectsArr.push({subjects:subjects2});
+    routineObj.subjectsArr.push({ subjects: subjects2 });
 
-    var subjects3=[];
+    var subjects3 = [];
     for (let i = 0; i < length3; i++) {
         const subjectStartTime = body3.subjectStartTime3[i];
         const subjectName = body3.subjectName3[i];
-        subjects3.push({subjectName,subjectStartTime})
+        subjects3.push({ subjectName, subjectStartTime })
     }
-    routineObj.subjectsArr.push({subjects:subjects3});
+    routineObj.subjectsArr.push({ subjects: subjects3 });
 
-    var subjects4=[];
+    var subjects4 = [];
     for (let i = 0; i < length4; i++) {
         const subjectStartTime = body4.subjectStartTime4[i];
         const subjectName = body4.subjectName4[i];
-        subjects4.push({subjectName,subjectStartTime})
+        subjects4.push({ subjectName, subjectStartTime })
     }
-    routineObj.subjectsArr.push({subjects:subjects4});
+    routineObj.subjectsArr.push({ subjects: subjects4 });
 
-    
+
 
     routineObj.save().then((doc) => {
         console.log("data saved");

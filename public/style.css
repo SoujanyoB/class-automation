@@ -344,6 +344,13 @@ button.doneRoutine {
     outline: none;
 }
 
+#error {
+    position: relative;
+    top: 20px;
+    opacity: 0;
+    color: red;
+}
+
 
 /* Responsive shit  */
 
