@@ -344,6 +344,24 @@ button.doneRoutine {
     outline: none;
 }
 
+.credentials {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
+}
+
+.credential-personal,
+.credential-institute {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+}
+
+.disabled:hover {
+    cursor: not-allowed;
+}
+
 #error {
     position: relative;
     top: 20px;

@@ -109,9 +109,7 @@ app.post('/login', (req, res) => { //send email an password in the request
                 res.header('x-auth', token).redirect('/' + token);
             })
         }).catch((err) => {
-            // console.log(err);
-            console.log(err);
-            res.render('login.ejs', { error: 'Email or password does not match!' });
+            res.render('login.ejs', { error: err });
             // res.status(400).send('Login error');
         });
     }
@@ -125,7 +123,6 @@ app.get('/', (req, res) => {
 
 app.get('/:token', authenticate, (req, res) => {
 
-    // console.log("token aya" + req.params.token);
     res.render('home.ejs', { token: req.params.token });
 });
 

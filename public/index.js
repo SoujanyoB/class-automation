@@ -6,6 +6,7 @@ var addRoutineButtons = document.getElementsByClassName('addRoutine'); //add rou
 var subjectSelector = document.querySelector('select#subjectNameSelection');
 var doneRoutineButtons = document.getElementsByClassName('doneRoutine');
 var addClassroomLinkButton = document.querySelector('button.addLinkButton');
+var disableMailPassCheck = document.getElementById('disable-institute-mail');
 
 
 //Code to enable the vertical expansion menu for the routines
@@ -141,35 +142,41 @@ for (i = 0; i < addRoutineButtons.length; i++) {
 // add Subject classroom link code
 addClassroomLinkButton.addEventListener('click', (e) => {
     var parentNode = e.target.parentElement;
-    var clone = parentNode.cloneNode(true);
 
-    clone.querySelector('select').selectedIndex = parentNode.querySelector('select').selectedIndex;
+    if (parentNode.querySelector('input').value != '' && parentNode.querySelector('select').value != 'default') {
+        var clone = parentNode.cloneNode(true);
 
-    var button = clone.querySelector('button');
-    button.classList.remove('addLinkButton');
-    button.classList.add('removeLinkButton');
-    button.innerHTML = '&minus;';
+        clone.querySelector('select').selectedIndex = parentNode.querySelector('select').selectedIndex;
 
-    parentNode.querySelector('select').selectedIndex = "0";
+        var button = clone.querySelector('button');
+        button.classList.remove('addLinkButton');
+        button.classList.add('removeLinkButton');
+        button.innerHTML = '&minus;';
 
-    button.addEventListener('click', e => {
-        e.target.parentElement.remove();
-    });
+        parentNode.querySelector('select').selectedIndex = "0";
 
-    var grandpaNode = parentNode.parentElement;
-    grandpaNode.insertBefore(clone, parentNode);
+        button.addEventListener('click', e => {
+            e.target.parentElement.remove();
+        });
 
-    parentNode.querySelector('input').value = "";
+        var grandpaNode = parentNode.parentElement;
+        grandpaNode.insertBefore(clone, parentNode);
 
-
+        parentNode.querySelector('input').value = "";
+    }
 });
 
 
-// This code makes add subject button disabled without filling up both values
-// for (i = 0; i < selectionOptions.length; i++) {
-//     selectionOptions[i].addEventListener('change', e => {
-//         var parent = e.target.parentElement;
-//         var input =
-//             // console.log(e.target);
-//     });
-// }
+// code to check if institute mail checkbox is clicked or not!
+disableMailPassCheck.addEventListener('change', e => {
+    var parent = e.target.parentElement;
+    if (e.target.checked) {
+        parent.nextElementSibling.setAttribute('disabled', 'disabled');
+        parent.nextElementSibling.nextElementSibling.setAttribute('disabled', 'disabled');
+    } else {
+        parent.nextElementSibling.removeAttribute('disabled');
+        parent.nextElementSibling.nextElementSibling.removeAttribute('disabled');
+    }
+    parent.nextElementSibling.classList.toggle('disabled');
+    parent.nextElementSibling.nextElementSibling.classList.toggle('disabled');
+});

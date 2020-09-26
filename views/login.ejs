@@ -14,34 +14,24 @@
     <div class="container">
         <div class="loginForm">
             <h1>LOGIN</h1>
-            <!-- <% if(locals.error) { %>
-                <p id="error" style="display: none;">
-                    <%= error %>
-                </p>
-                <script>
-                    var error = document.getElementById('error');
-                    alert(error.innerText);
-                </script>
-                <% } %> -->
-            <!-- <% if(locals.error) { %>
+            <% if(locals.error) { %>
                 <p class="unisansThin" id="error">
                     <%= error %>
                 </p>
                 <% } else { %>
-                    <p class="unisansThin" id="error" style="opacity: 0;">Hello</p>
-                    <% } %> -->
-            <p class="unisansThin" id="error">Enter a valid email and password!</p>
-            <form id="loginFormElement" method="POST" action="/login" name="loginForm" onsubmit="return checkForm()">
-                <div class="formElement"><input type="text" name="email" id="loginEmailInput" placeholder="Email or Phone"></div>
-                <div class="formElement"><input type="password" name="password" id="loginPasswordInput" placeholder="Password"></div>
-                <div class="formElement formButton"><button id="loginButton" type="submit">Log In</button></div>
-            </form>
+                    <p class="unisansThin" id="error">Enter a valid email and password!</p>
+                    <% } %>
+                        <form id="loginFormElement" method="POST" action="/login" name="loginForm" onsubmit="return checkForm()">
+                            <div class="formElement"><input type="text" name="email" id="loginEmailInput" placeholder="Email or Phone"></div>
+                            <div class="formElement"><input type="password" name="password" id="loginPasswordInput" placeholder="Password"></div>
+                            <div class="formElement formButton"><button id="loginButton" type="submit">Log In</button></div>
+                        </form>
 
-            <a href="/register" id="toRegisterLink">
-                <div>
-                    <p>New user? <b>Sign Up!</b></p>
-                </div>
-            </a>
+                        <a href="/register" id="toRegisterLink">
+                            <div>
+                                <p>New user? <b>Sign Up!</b></p>
+                            </div>
+                        </a>
 
         </div>
 
