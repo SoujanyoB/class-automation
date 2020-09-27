@@ -15,100 +15,32 @@
                 <div class="card allowOverflow fixedHeight">
                     <h2>1. ROUTINE:</h2>
                     <form action="/<%=token%>" method="post">
-                        <button class="accordion last" type="button">
-                            <span id="0" class="day">Monday</span>
-                            <span class="icon">&plus;</span>
-                        </button>
-                        <div class="routine">
-                            <div class="routineModule">
-                                <div class="individualRoutine">
-                                    <select name="subjectStartTime0" class="timeSelection">
-                                        <%- include('partials/options') %>
-                                    </select>
-                                    <input type="text" class="subjectNameInput" name="subjectName0" placeholder="Subject Name">
-                                    <div class="modifyRoutineButtons">
-                                        <button type="button" class="doneRoutine">&check;</button>
-                                        <button type="button" class="addRoutine">&plus;</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <button class="accordion last" type="button">
-                            <span id="1" class="day">Tuesday</span>
+                        <% if(!locals.routine || !locals.startTime) { %>
+                            <% for(var i = 0; i< locals.day.length; i++) { %>
+                                <button class="accordion last" type="button">
+                            <span id="<%= i %>" class="day"><%= locals.day[i] %></span>
                             <span class="icon">&plus;</span>
                         </button>
-                        <div class="routine">
-                            <div class="routineModule">
-                                <div class="individualRoutine">
-                                    <select name="subjectStartTime1" class="timeSelection">
+                                <div class="routine">
+                                    <div class="routineModule">
+                                        <div class="individualRoutine">
+                                            <select name="subjectStartTime<%= i %>" class="timeSelection">
                                         <%- include('partials/options') %>
                                     </select>
-                                    <input type="text" class="subjectNameInput" name="subjectName1" placeholder="Subject Name">
-                                    <div class="modifyRoutineButtons">
-                                        <button type="button" class="doneRoutine">&check;</button>
-                                        <button type="button" class="addRoutine">&plus;</button>
+                                            <input type="text" class="subjectNameInput" name="subjectName<%= i %>" placeholder="Subject Name">
+                                            <div class="modifyRoutineButtons">
+                                                <button type="button" class="doneRoutine">&check;</button>
+                                                <button type="button" class="addRoutine">&plus;</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                                <% } %>
+                                    <% } else { %>
+                                        <p>Hello</p>
+                                        <% } %>
 
-                        <button class="accordion last" type="button">
-                            <span id="2" class="day">Wednesday</span>
-                            <span class="icon">&plus;</span>
-                        </button>
-                        <div class="routine">
-                            <div class="routineModule">
-                                <div class="individualRoutine">
-                                    <select name="subjectStartTime2" class="timeSelection">
-                                        <%- include('partials/options') %>
-                                    </select>
-                                    <input type="text" class="subjectNameInput" name="subjectName2" placeholder="Subject Name">
-                                    <div class="modifyRoutineButtons">
-                                        <button type="button" class="doneRoutine">&check;</button>
-                                        <button type="button" class="addRoutine">&plus;</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button class="accordion last" type="button">
-                            <span id="3" class="day">Thursday</span>
-                            <span class="icon">&plus;</span>
-                        </button>
-                        <div class="routine">
-                            <div class="routineModule">
-                                <div class="individualRoutine">
-                                    <select name="subjectStartTime3" class="timeSelection">
-                                        <%- include('partials/options') %>
-                                    </select>
-                                    <input type="text" class="subjectNameInput" name="subjectName3" placeholder="Subject Name">
-                                    <div class="modifyRoutineButtons">
-                                        <button type="button" class="doneRoutine">&check;</button>
-                                        <button type="button" class="addRoutine">&plus;</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button class="accordion last" type="button">
-                            <span id="4" class="day">Friday</span>
-                            <span class="icon">&plus;</span>
-                        </button>
-                        <div class="routine">
-                            <div class="routineModule">
-                                <div class="individualRoutine">
-                                    <select name="subjectStartTime4" class="timeSelection">
-                                        <%- include('partials/options') %>
-                                    </select>
-                                    <input type="text" class="subjectNameInput" name="subjectName4" placeholder="Subject Name">
-                                    <div class="modifyRoutineButtons">
-                                        <button type="button" class="doneRoutine">&check;</button>
-                                        <button type="button" class="addRoutine">&plus;</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                 </div>
 
@@ -116,30 +48,42 @@
                     <div class="innerCard grid allowOverflow">
                         <h2>2. Classroom Links:</h2>
                         <div class="links">
-                            <div class="link">
-                                <select name="subjectNameSelection" id="subjectNameSelection" class="timeSelection">
+                            <% if (!locals.meetSubjects || !locals.meetLinks) { %>
+                                <div class="link">
+                                    <select name="subjectNameSelection" id="subjectNameSelection" class="timeSelection">
                                     <option value="default" selected>Subject</option>
                                 </select>
-                                <input type="text" name="subjectMeetLinkInput" class="subjectNameInput fillParent" placeholder="Google Classroom Link">
-                                <button type="button" class="addLinkButton">&plus;</button>
-                            </div>
+                                    <input type="text" name="subjectMeetLinkInput" class="subjectNameInput fillParent" placeholder="Google Classroom Link">
+                                    <button type="button" class="addLinkButton">&plus;</button>
+                                </div>
+                                <% } else { %>
+                                    <p>Hello</p>
+                                    <% } %>
                         </div>
                     </div>
                     <div class="innerCard">
                         <h2>3. Credentials:</h2>
                         <div class="credentials flex-equal">
-                            <div class="credential-personal">
-                                <input type="text" name="personal_mail" class="subjectNameInput fillParent" placeholder="Personal Mail ID">
-                                <input type="password" name="personal_pass" class="subjectNameInput fillParent" placeholder="Password">
-                            </div>
-                            <div class="credential-institute flex-equal">
-                                <div class="disable-insitute-check">
-                                    <input type="checkbox" name="disable_institute" value="disable" id="disable-institute-mail">
-                                    <label for="disable-institute-mail" class="unisansThin">Disable</label>
+                            <% if( !locals.personal_mail || !locals.personal_pass) { %>
+                                <div class="credential-personal">
+                                    <input type="text" name="personal_mail" class="subjectNameInput fillParent" placeholder="Personal Mail ID">
+                                    <input type="password" name="personal_pass" class="subjectNameInput fillParent" placeholder="Password">
                                 </div>
-                                <input type="text" name="institute_mail" class="subjectNameInput fillParent" placeholder="Institute Mail ID">
-                                <input type="password" name="institute_pass" class="subjectNameInput fillParent" placeholder="Institute password">
-                            </div>
+                                <% } else { %>
+                                    <p>Hello</p>
+                                    <% } %>
+                                        <% if(!locals.institute_mail || !locals.institute_pass) { %>
+                                            <div class="credential-institute flex-equal">
+                                                <div class="disable-insitute-check">
+                                                    <input type="checkbox" name="disable_institute" value="disable" id="disable-institute-mail">
+                                                    <label for="disable-institute-mail" class="unisansThin">Disable</label>
+                                                </div>
+                                                <input type="text" name="institute_mail" class="subjectNameInput fillParent" placeholder="Institute Mail ID">
+                                                <input type="password" name="institute_pass" class="subjectNameInput fillParent" placeholder="Institute password">
+                                            </div>
+                                            <% } else { %>
+                                                <p>Hello</p>
+                                                <% } %>
                         </div>
                     </div>
 

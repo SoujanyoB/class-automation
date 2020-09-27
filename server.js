@@ -123,7 +123,7 @@ app.get('/', (req, res) => {
 
 app.get('/:token', authenticate, (req, res) => {
 
-    res.render('home.ejs', { token: req.params.token });
+    res.render('home.ejs', { token: req.params.token, day: day });
 });
 
 
